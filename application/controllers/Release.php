@@ -5,26 +5,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Create By : Aryo
  * Youtube : Aryo Coding
  */
-class Companies extends MY_Controller
+class Release extends MY_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->model(array('Mod_companies'));
+        $this->load->model(array('Mod_releases'));
     }
 
     public function index()
     {
       $this->load->helper('url');
-      $this->template->load('layoutbackend','companies');
+      $this->template->load('layoutbackend','releases');
   }
 
   public function ajax_list()
   {
     ini_set('memory_limit','512M');
     set_time_limit(3600);
-    $list = $this->Mod_companies->get_datatables();
+    $list = $this->Mod_releases->get_datatables();
     $data = array();
     $no = $_POST['start'];
     foreach ($list as $pel) {
@@ -43,8 +43,8 @@ class Companies extends MY_Controller
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Mod_companies->count_all(),
-            "recordsFiltered" => $this->Mod_companies->count_filtered(),
+            "recordsTotal" => $this->Mod_releases->count_all(),
+            "recordsFiltered" => $this->Mod_releases->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -75,7 +75,7 @@ class Companies extends MY_Controller
                     'owner' => $this->input->post('owner'),
                     'releasefolder' => $gambar['file_name']
                 );
-                $this->Mod_companies->insert("companies", $save);
+                $this->Mod_releases->insert("releases", $save);
                 echo json_encode(array("status" => TRUE));
             }
         }
@@ -108,13 +108,13 @@ class Companies extends MY_Controller
                     'updated' => $date,
                     'releaseFolder' => $gambar['file_name']
                 );
-                $g = $this->Mod_companies->get_file($id)->row_array();
+                $g = $this->Mod_releases->get_file($id)->row_array();
 
                 if ($g != null || $g != "") {
                 //hapus gambar yg ada diserver
                     unlink('./assets/File/'.$g['releaseFolder']);
                 }
-                $this->Mod_companies->update($id, $save);
+                $this->Mod_releases->update($id, $save);
                 echo json_encode(array("status" => TRUE));
             }else{
                 $save  = array(
@@ -126,7 +126,7 @@ class Companies extends MY_Controller
                     'owner' => $this->input->post('owner'),
                     'updated' => $date,
                 );
-                $this->Mod_companies->update($id, $save);
+                $this->Mod_releases->update($id, $save);
                 echo json_encode(array("status" => TRUE));
             }
             
@@ -134,14 +134,14 @@ class Companies extends MY_Controller
 
         public function edit($id)
         {
-            $data = $this->Mod_companies->get_companies($id);
+            $data = $this->Mod_releases->get_releases($id);
             echo json_encode($data);
         }
 
         public function delete()
         {
             $id = $this->input->post('id');
-            $this->Mod_companies->delete($id, 'companies');        
+            $this->Mod_releases->delete($id, 'releases');        
             echo json_encode(array("status" => TRUE));
         }
         private function _validate()

@@ -6,7 +6,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header bg-light">
-						<h3 class="card-title"><i class="fa fa-list text-blue"></i> Data Companies</h3>
+						<h3 class="card-title"><i class="fa fa-list text-blue"></i> Data release</h3>
 						<div class="text-right">
 							<button type="button" class="btn btn-sm btn-outline-primary" onclick="add()" title="Add Data"><i class="fas fa-plus"></i> Add</button>
 						</div>
@@ -53,14 +53,14 @@ $(document).ready(function() {
     	"responsive": true,
     	"autoWidth": false,
     	"language": {
-    		"sEmptyTable": "Data Companies Belum Ada"
+    		"sEmptyTable": "Data Release Belum Ada"
     	},
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [], //Initial no order.
         // Load data for the table's content from an Ajax source
         "ajax": {
-        	"url": "<?php echo site_url('companies/ajax_list')?>",
+        	"url": "<?php echo site_url('release/ajax_list')?>",
         	"type": "POST"
         },
 
@@ -112,7 +112,7 @@ function hapus(id){
   }).then((result) => {
     if (result.value) {
         $.ajax({
-            url:"<?php echo site_url('companies/delete');?>",
+            url:"<?php echo site_url('release/delete');?>",
             type:"POST",
             data:"id="+id,
             cache:false,
@@ -146,7 +146,7 @@ function add()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal({backdrop: 'static', keyboard: false}); // show bootstrap modal
-    $('.modal-title').text('Add Companies'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add release'); // Set Title to Bootstrap modal title
 }
 
 function edit(id){
@@ -157,7 +157,7 @@ function edit(id){
 
     //Ajax Load data from ajax
     $.ajax({
-    	url : "<?php echo site_url('companies/edit')?>/" + id,
+    	url : "<?php echo site_url('release/edit')?>/" + id,
     	type: "GET",
     	dataType: "JSON",
     	success: function(data)
@@ -186,9 +186,9 @@ function save()
     $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
     if(save_method == 'add') {
-        url = "<?php echo site_url('companies/insert')?>";//arahin ke companies insert
+        url = "<?php echo site_url('release/insert')?>";//arahin ke release insert
     } else {
-        url = "<?php echo site_url('companies/update')?>";//arahin ke companies update
+        url = "<?php echo site_url('release/update')?>";//arahin ke release update
     }
 
     var formdata = new FormData($('#form')[0]);
