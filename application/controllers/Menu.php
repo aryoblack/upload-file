@@ -73,7 +73,7 @@ class Menu extends MY_Controller {
     {
         $this->_validate();
 			$save  = array(
-                'nama_menu'	=> $this->input->post('nama_menu'),
+                'nama_menu'	=> ucwords($this->input->post('nama_menu')),
                 'link'  	=> $this->input->post('link'),
                 'icon'   	=> $this->input->post('icon'),
                 'urutan'  	=> $this->input->post('urutan'),
@@ -102,7 +102,7 @@ class Menu extends MY_Controller {
         $this->_validate();
         $id_menu      = $this->input->post('id_menu');
         $save  = array(
-            'nama_menu' => $this->input->post('nama_menu'),
+            'nama_menu' => ucwords($this->input->post('nama_menu')),
             'link'      => $this->input->post('link'),
             'icon'      => $this->input->post('icon'),
             'urutan'    => $this->input->post('urutan'),
