@@ -16,13 +16,13 @@
 						<table id="tblegori" class="table table-bordered table-striped table-hover">
 							<thead>
 								<tr class="bg-info">
-									<th>Code</th>
-									<th>Name</th>
-                                    <th>Address</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Owner</th>
-                                    <th>File</th>
+									<th>Company</th>
+									<!-- <th>Release Date</th> -->
+                                    <th>Version</th>
+                                    <th>Change Log</th>
+                                    <th>Instruction</th>
+                                    <th>File name</th>
+                                    <th>Publisher</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -164,14 +164,15 @@ function edit(id){
     	{
 
     		$('[name="id"]').val(data.id);
-    		$('[name="code"]').val(data.code);
-            $('[name="name"]').val(data.name);
-            $('[name="address"]').val(data.address);
-            $('[name="email"]').val(data.email);
-            $('[name="phone"]').val(data.phone);
-            $('[name="owner"]').val(data.owner);
+    		$('[name="company"]').val(data.company);
+            // $('[name="releasedate"]').val(data.releaseDate);
+            $('[name="version"]').val(data.version);
+            $('[name="changelog"]').val(data.changelog);
+            $('[name="instruction"]').val(data.instruction);
+            $('[name="filename"]').val(data.filename);
+            $('[name="publisher"]').val(data.publisher);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Barang'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Release'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -256,44 +257,44 @@ function save()
 					<input type="hidden" value="" name="id"/> 
 					<div class="card-body">
 						<div class="form-group row ">
-							<label for="code" class="col-sm-3 col-form-label">CODE</label>
+							<label for="company" class="col-sm-3 col-form-label">Company</label>
 							<div class="col-sm-9 kosong">
-								<input type="text" class="form-control" name="code" id="code" placeholder="CODE" >
+								<!-- <input type="text" class="form-control" name="company" id="company" placeholder="Company" > -->
+                                <select class="form-control" name="company" id="company">
+                                    <option value="">Select Company</option>
+                                    <?php
+                                    foreach ($company as $c) {?>
+                                        <option value="<?=$c->id;?>"><?=$c->name;?></option>
+                                    <?php }?>
+                                </select>
 								<span class="help-block"></span>
 							</div>
 						</div>
-                        <div class="form-group row ">
-                            <label for="name" class="col-sm-3 col-form-label">Name</label>
+                        <!-- <div class="form-group row ">
+                            <label for="name" class="col-sm-3 col-form-label">Release Date</label>
                             <div class="col-sm-9 kosong">
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Name" >
+                                <input type="datepicker" class="form-control" name="releasedate" id="releasedate" placeholder="Release Date" >
+                                <span class="help-block"></span>
+                            </div>
+                        </div> -->
+                        <div class="form-group row ">
+                            <label for="name" class="col-sm-3 col-form-label">Version</label>
+                            <div class="col-sm-9 kosong">
+                                <input type="text" class="form-control" name="version" id="version" placeholder="Version" >
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group row ">
-                            <label for="address" class="col-sm-3 col-form-label">Address</label>
+                            <label for="address" class="col-sm-3 col-form-label">Change Log</label>
                             <div class="col-sm-9 kosong">
-                                <textarea type="text" class="form-control" name="address" id="address" placeholder="Address" ></textarea> 
+                                <textarea type="text" class="form-control" name="changelog" id="changelog" placeholder="Change Log" ></textarea> 
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group row ">
-                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <label for="instruction" class="col-sm-3 col-form-label">Instruction</label>
                             <div class="col-sm-9 kosong">
-                                <input type="text" class="form-control" name="email" id="email" placeholder="Email" >
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row ">
-                            <label for="nama" class="col-sm-3 col-form-label">Phone</label>
-                            <div class="col-sm-9 kosong">
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" >
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                         <div class="form-group row ">
-                            <label for="nama" class="col-sm-3 col-form-label">Owner</label>
-                            <div class="col-sm-9 kosong">
-                                <input type="text" class="form-control" name="owner" id="owner" placeholder="Owner" >
+                                <textarea type="text" class="form-control" name="instruction" id="instruction" placeholder="Instruction" ></textarea> 
                                 <span class="help-block"></span>
                             </div>
                         </div>

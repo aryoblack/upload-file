@@ -22,7 +22,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Owner</th>
-                                    <th>File</th>
+                                    <!-- <th>File</th> -->
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -171,7 +171,7 @@ function edit(id){
             $('[name="phone"]').val(data.phone);
             $('[name="owner"]').val(data.owner);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Barang'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Companies'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)

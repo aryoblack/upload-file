@@ -36,7 +36,7 @@ class Companies extends MY_Controller
             $row[] = $pel->email;
             $row[] = $pel->phone;
             $row[] = $pel->owner;
-            $row[] = "<a  href='./assets/File/$pel->releaseFolder' title=\"File\" target='_blank'>$pel->releaseFolder</a>";
+            /*$row[] = "<a  href='./assets/File/$pel->releaseFolder' title=\"File\" target='_blank'>$pel->releaseFolder</a>";*/
             $row[] = "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit($pel->id)\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\"  onclick=\"hapus($pel->id)\"><i class=\"fas fa-trash\"></i></a>";
             $data[] = $row;
         }
@@ -54,7 +54,7 @@ class Companies extends MY_Controller
     public function insert()
     {
         $this->_validate();
-         if(!empty($_FILES['imagefile']['name'])) {
+         /*if(!empty($_FILES['imagefile']['name'])) {
         $config['upload_path']   = './assets/File/';
             $config['allowed_types'] = 'gif|jpg|jpeg|png|zip|xls|xlsx|pdf'; //mencegah upload backdor
             $config['max_size']      = '1000';
@@ -65,7 +65,7 @@ class Companies extends MY_Controller
             $this->upload->initialize($config);
             
             if ($this->upload->do_upload('imagefile')){
-                $gambar = $this->upload->data();
+                $gambar = $this->upload->data();*/
                 $save  = array(
                     'code' => $this->input->post('code'),
                     'name' => $this->input->post('name'),
@@ -73,12 +73,12 @@ class Companies extends MY_Controller
                     'email' => $this->input->post('email'),
                     'phone' => $this->input->post('phone'),
                     'owner' => $this->input->post('owner'),
-                    'releasefolder' => $gambar['file_name']
+                    // 'releasefolder' => $gambar['file_name']
                 );
                 $this->Mod_companies->insert("companies", $save);
                 echo json_encode(array("status" => TRUE));
-            }
-        }
+           /* }
+        }*/
         
     }
 
@@ -87,7 +87,7 @@ class Companies extends MY_Controller
         $this->_validate();
         $date=date("Y-m-d H-i-s");
         $id      = $this->input->post('id');
-        $config['upload_path']   = './assets/File/';
+        /*$config['upload_path']   = './assets/File/';
             $config['allowed_types'] = 'gif|jpg|jpeg|png|zip|xls|xlsx|pdf'; //mencegah upload backdor
             $config['max_size']      = '1000';
             $config['max_width']     = '2000';
@@ -106,7 +106,7 @@ class Companies extends MY_Controller
                     'phone' => $this->input->post('phone'),
                     'owner' => $this->input->post('owner'),
                     'updated' => $date,
-                    'releaseFolder' => $gambar['file_name']
+                    // 'releaseFolder' => $gambar['file_name']
                 );
                 $g = $this->Mod_companies->get_file($id)->row_array();
 
@@ -116,7 +116,7 @@ class Companies extends MY_Controller
                 }
                 $this->Mod_companies->update($id, $save);
                 echo json_encode(array("status" => TRUE));
-            }else{
+            }else{*/
                 $save  = array(
                     'code' => $this->input->post('code'),
                     'name' => $this->input->post('name'),
@@ -128,7 +128,7 @@ class Companies extends MY_Controller
                 );
                 $this->Mod_companies->update($id, $save);
                 echo json_encode(array("status" => TRUE));
-            }
+            // }
             
         }
 

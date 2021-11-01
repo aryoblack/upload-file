@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Mod_releases extends CI_Model
 {
 	var $table = 'releases';
-	var $column_search = array('id','code','name','address','email','phone','owner'); 
+	var $column_search = array('id','company','releasedate','version','changelog','instruction','publisher'); 
 	var $column_order = array('id');
 	var $order = array('id' => 'desc'); 
 	function __construct()
@@ -94,7 +94,11 @@ class Mod_releases extends CI_Model
         $this->db->where('id',$id);
         return $this->db->get('releases')->row();
     }
-
+    function get_company()
+    {   
+        
+        return $this->db->get('companies')->result();
+    }
         function delete($id, $table)
     {
         $this->db->where('id', $id);
@@ -103,7 +107,7 @@ class Mod_releases extends CI_Model
 
     function get_file($id)
     {
-        $this->db->select('releaseFolder');
+        $this->db->select('filename');
         $this->db->from('releases');
         $this->db->where('id', $id);
         return $this->db->get();
