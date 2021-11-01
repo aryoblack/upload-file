@@ -297,13 +297,13 @@ function save()
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        <div class="form-group row ">
+                       <!--  <div class="form-group row ">
                             <label for="foto" class="col-sm-3 col-form-label">File</label>
                           <div class="col-sm-9 kosong ">
                             <input type="file" class="form-control btn-file"  name="imagefile" id="imagefile" placeholder="File" value="UPLOAD">
                             <span class="help-block"></span>
                         </div>
-                    </div>
+                    </div> -->
 					</div>
 				</form>
 			</div>
