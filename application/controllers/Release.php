@@ -37,7 +37,7 @@ class Release extends MY_Controller
             $row[] = $pel->changelog;//array 2
             $row[] = $pel->instruction;
             $row[] = "<a  href='./assets/File/$pel->fileName' title=\"File\" target='_blank'>$pel->fileName</a>";
-            $row[] = $pel->publisher;
+            $row[] = $pel->full_name;
             $row[] = "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit($pel->id)\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\"  onclick=\"hapus($pel->id)\"><i class=\"fas fa-trash\"></i></a>";
             $data[] = $row;
         }
@@ -76,7 +76,7 @@ class Release extends MY_Controller
                     'instruction' => $this->input->post('instruction'),
                     'publisher' => $id_user,
                     'created' => $date,
-                    'filename' => slug($gambar['file_name'])
+                    'filename' => $gambar['file_name']
                 );
                 $this->Mod_releases->insert("releases", $save);
                 echo json_encode(array("status" => TRUE));
@@ -108,13 +108,13 @@ class Release extends MY_Controller
                     'changelog' => $this->input->post('changelog'),
                     'instruction' => $this->input->post('instruction'),
                     'updated' => $date,
-                    'filename' => slug($gambar['file_name'])
+                    'filename' => $gambar['file_name']
                 );
                 $g = $this->Mod_releases->get_file($id)->row_array();
 
                 if ($g != null || $g != "") {
                 //hapus gambar yg ada diserver
-                    unlink('./assets/File/'.$g['releaseFolder']);
+                    unlink('./assets/File/'.$g['filename']);
                 }
                 $this->Mod_releases->update($id, $save);
                 echo json_encode(array("status" => TRUE));
@@ -142,6 +142,11 @@ class Release extends MY_Controller
         public function delete()
         {
             $id = $this->input->post('id');
+             $g = $this->Mod_releases->get_file($id)->row_array();
+                if ($g != null) {
+                //hapus gambar yg ada diserver
+                    unlink('./assets/File/'.$g['fileName']);
+                }
             $this->Mod_releases->delete($id, 'releases');        
             echo json_encode(array("status" => TRUE));
         }

@@ -19,8 +19,9 @@ class Mod_releases extends CI_Model
 
 		private function _get_datatables_query()
 	{
-		
-		$this->db->from('releases');
+		$this->db->select('a.*,b.full_name');
+		$this->db->join('tbl_user b', 'b.id_user=a.publisher');
+		$this->db->from('releases a');
 		$i = 0;
 
 	foreach ($this->column_search as $item) // loop column 
@@ -107,7 +108,7 @@ class Mod_releases extends CI_Model
 
     function get_file($id)
     {
-        $this->db->select('filename');
+        $this->db->select('fileName');
         $this->db->from('releases');
         $this->db->where('id', $id);
         return $this->db->get();

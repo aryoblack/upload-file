@@ -54,6 +54,7 @@ class Companies extends MY_Controller
     public function insert()
     {
         $this->_validate();
+        $date=date("Y-m-d H-i-s");
          /*if(!empty($_FILES['imagefile']['name'])) {
         $config['upload_path']   = './assets/File/';
             $config['allowed_types'] = 'gif|jpg|jpeg|png|zip|xls|xlsx|pdf'; //mencegah upload backdor
@@ -73,6 +74,7 @@ class Companies extends MY_Controller
                     'email' => $this->input->post('email'),
                     'phone' => $this->input->post('phone'),
                     'owner' => $this->input->post('owner'),
+                    'created' => $date,
                     // 'releasefolder' => $gambar['file_name']
                 );
                 $this->Mod_companies->insert("companies", $save);
@@ -141,6 +143,7 @@ class Companies extends MY_Controller
         public function delete()
         {
             $id = $this->input->post('id');
+            
             $this->Mod_companies->delete($id, 'companies');        
             echo json_encode(array("status" => TRUE));
         }
